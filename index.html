@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cult DSP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cult DSP – open-source tools for spatial audio, machine listening, and metadata.">
+  <style>
+    :root {
+      --bg: #050608;
+      --fg: #f5f5f5;
+      --accent: #5cc8ff;
+      --muted: #a0a0a0;
+      --border: #22242a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #10121a 0, #050608 60%);
+      color: var(--fg);
+      font-family: "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .brand {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 500;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+    }
+
+    .tagline {
+      max-width: 34rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .projects {
+      margin-bottom: 2rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .projects {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .project {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .project-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .project-name {
+      font-size: 1rem;
+      margin: 0;
+      color: var(--accent);
+      text-transform: lowercase;
+    }
+
+    .project-body {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      width: fit-content;
+      margin-top: 0.5rem;
+      padding: 0.12rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .badge-dot {
+      width: 0.32rem;
+      height: 0.32rem;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .small {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">C U L T &nbsp; D S P</div>
+      <h1>open-source spatial audio tooling</h1>
+      <p class="tagline">
+        Cult DSP builds small, focused tools for spatial audio, machine listening,
+        and metadata workflows – designed for researchers, artists, and engineers
+        working in object-based and immersive formats.
+      </p>
+    </header>
+
+    <main>
+      <section class="projects" aria-label="Projects">
+        <article class="project">
+          <div class="project-label">/ project</div>
+          <h2 class="project-name">sonoPleth</h2>
+          <p class="project-body">
+            A metadata-first pipeline for decoding, analyzing, and remapping
+            object-based spatial mixes (ADM / Atmos), with export-friendly
+            formats for research, visualization, and custom renderers.
+          </p>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>coming soon</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-label">/ project</div>
+          <h2 class="project-name">spatialSeed</h2>
+          <p class="project-body">
+            MIR + ML assisted spatialization engine for procedural object layouts:
+            from feature-rich stems to adaptive spatial scenes, ready for
+            authoring and remixing in immersive environments.
+          </p>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>in development</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-label">/ project</div>
+          <h2 class="project-name">wetStem</h2>
+          <p class="project-body">
+            A playful DSP lab for fluid, water-adjacent textures: granular delays,
+            spectral smearing, and modulation utilities tuned for spatial mixes
+            and live performance.
+          </p>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>prototype phase</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <!-- Replace # with your real links when ready -->
+        <a href="#" class="small">github</a>
+        <a href="mailto:hello@cultdsp.com" class="small">hello@cultdsp.com</a>
+      </div>
+      <div class="small">© <span id="year"></span> Cult DSP</div>
+    </footer>
+  </div>
+
+  <script>
+    // Tiny helper: keep the year current
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
