@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# EDIT: Replace https://cultdsp.com with your actual domain
+Sitemap: https://cultdsp.com/sitemap.xml
