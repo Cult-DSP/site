@@ -21,7 +21,7 @@ Key idea: bring “DAW-grade” immersive mixes into realtime environments—ins
 
 
 on spatial seed:
-Spatial Seed is a procedural spatial upmixer that outputs ADM. These generated ADMs can be:
+Spatial Seed is a procedural spatial upmixer that outputs ADM. Powered by machine learning, users can navigate a latent space matrix to stylize their mix. These generated ADMs can be:
 
 played back directly in Spatial Root, or
 
@@ -32,4 +32,28 @@ Key idea: fast, controllable immersive generation that stays inside open, editab
 
 
 bottom section on cult dsp github:
-We conduct research into modern spatial audio and spatial computing toolchains, with an emphasis on open formats and reproducible workflows. Follow development on GitHub—or join the organization as a contributor to help shape the next generation of spatial tools.
+We conduct research into modern spatial audio and spatial computing toolchains, with an emphasis on open formats and reproducible workflows. Follow development on GitHub—or join the organization as a contributor to help make spatial audio more accessible and interactive. 
+
+
+
+### PROJECTS PAGE
+
+Spatial Root
+* Tags(Research, Spatial Audio Player, Audio Engine, Audio Rendering, ADM, Dolby Atmos, Sony 360RA, Transcoder, Decoder)
+* In Beta
+
+
+Spatial Seed
+* Tags(Research, Upmixing, Procedural Generation, Spatial Mixing, ADM)
+* In Development 
+
+
+LUSID
+* Tags(Research, Immersive Scene, XR, Spatial Metadata, Audio Metadata, Interactive)
+* In Beta
+
+
+Cult Transcoder
+[Coordinates and Universal Localization Transcoding ]
+* Tags (Utility, Interoperability, Format Decoding, Format Encoding, ADM, MPEG-H,)
+* In Beta
