@@ -42,11 +42,16 @@ We research spatial audio and spatial computing toolchains with an emphasis on o
 
 ### LUSID
 
+- **Subtitle:** Lightweight Universal Spatial Interaction Data
 - **Status:** Beta
 - **Tags:** Research, Immersive Scene, XR, Spatial Metadata, Audio Metadata, Interactive
+- **Extended Info:**-- Scene metadata schema that packages spatial object positions, audio feature analysis, volumetric data, and agent state. Serves as the backbone to the CULT DSP toolchain.
+  \*\* Link:https://github.com/Cult-DSP/LUSID
 
 ### Cult Transcoder
 
 - **Subtitle:** Coordinates and Universal Localization Transcoding
 - **Status:** Beta
 - **Tags:** Utility, Interoperability, Format Decoding, Format Encoding, ADM, MPEG-H, NGA
+- **Extended Info:**-- Universal Immersive Audio transcoder. Powers realtime decoding in Spatial Root
+  \*\*link: https://github.com/Cult-DSP/cult_transcoder
