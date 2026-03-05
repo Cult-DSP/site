@@ -1,3 +1,7 @@
+## TODO
+
+- update contact page and about
+
 ## Company overview
 
 CULT DSP builds open tools for spatial audio rendering, playback, and metadata workflows. The goal is to make immersive formats usable in realtime and interactive contexts, including NGA and spatial computing. We design for research labs, artists, and immersive venues with flexible routing, layout-agnostic playback, and clear metadata pipelines.
