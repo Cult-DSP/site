@@ -142,15 +142,124 @@
             audio, DSP research, or experimental sound? Reach out.
           </p>
 
-          <div class="contact-links fade-up fade-up-2">
-            <a href="mailto:lucianparisi@gmail.com" class="contact-link">
-              <span class="icon" aria-hidden="true">✉</span>
-              <span>
-                lucianparisi@gmail.com
-                <span class="link-meta">Email — preferred for collaboration enquiries</span>
-              </span>
-            </a>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(
+                auto-fill,
+                minmax(min(100%, 320px), 1fr)
+              );
+              gap: var(--sp-7);
+              align-items: start;
+            "
+            class="fade-up fade-up-2"
+          >
+            <!-- Direct links -->
+            <div>
+              <h2 class="eyebrow mb-4" style="color: var(--ink-2)">Direct</h2>
+              <div class="contact-links">
+                <!-- EDIT: Replace hello@cultdsp.com with your actual email -->
+                <a href="mailto:hello@cultdsp.com" class="contact-link">
+                  <span class="icon" aria-hidden="true">✉</span>
+                  <span>
+                    hello@cultdsp.com
+                    <span class="link-meta"
+                      >Email — preferred for collaboration enquiries</span
+                    >
+                  </span>
+                </a>
+                <a
+                  href="https://github.com/placeholder-cult-dsp"
+                  class="contact-link"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span class="icon" aria-hidden="true">⌥</span>
+                  <span>
+                    GitHub Org
+                    <span class="link-meta">Issues, PRs, and Discussions</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Form (mailto-based, no backend required) -->
+            <div>
+              <h2 class="eyebrow mb-4" style="color: var(--ink-2)">
+                Message Form
+              </h2>
+              <!-- This form uses mailto — no backend needed. Opens user's mail client. -->
+              <!-- EDIT: Replace hello@cultdsp.com below with your real email address -->
+              <form
+                class="contact-form"
+                action="mailto:hello@cultdsp.com"
+                method="get"
+                enctype="text/plain"
+              >
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="reply">Email</label>
+                  <input
+                    type="email"
+                    id="reply"
+                    name="reply-to"
+                    placeholder="you@example.com"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Collaboration / Research / Question"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="body">Message</label>
+                  <textarea
+                    id="body"
+                    name="body"
+                    rows="5"
+                    placeholder="Tell me what you're working on…"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Send via Email Client
+                </button>
+                <p class="form-note">
+                  ↑ Opens your default mail app pre-filled. No data is sent to
+                  our servers.
+                </p>
+              </form>
+            </div>
           </div>
+
+          <hr style="margin: var(--sp-8) 0 var(--sp-6)" />
+          <p class="body-sm" style="max-width: 50ch">
+            For bug reports and feature requests, please open an issue on the
+            relevant
+            <a
+              href="https://github.com/placeholder-cult-dsp"
+              target="_blank"
+              rel="noopener"
+              >GitHub repository</a
+            >
+            directly — it's the best way to track work.
+          </p>
         </div>
       </section>
     </main>
