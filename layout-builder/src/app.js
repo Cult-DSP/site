@@ -30,24 +30,24 @@ class LayoutBuilderApp {
    */
   cacheElements() {
     const ids = [
-      'speaker-table',
-      'subwoofer-table',
-      'preview-canvas',
-      'validation-container',
-      'add-speaker-btn',
-      'add-subwoofer-btn',
-      'sort-channel-btn',
-      'sort-azimuth-btn',
-      'export-json-btn',
-      'copy-json-btn',
-      'download-json-btn',
-      'import-file-input',
-      'import-btn',
-      'json-output',
-      'label-mode-select'
+      "speaker-table",
+      "subwoofer-table",
+      "preview-canvas",
+      "validation-container",
+      "add-speaker-btn",
+      "add-subwoofer-btn",
+      "sort-channel-btn",
+      "sort-azimuth-btn",
+      "export-json-btn",
+      "copy-json-btn",
+      "download-json-btn",
+      "import-file-input",
+      "import-btn",
+      "json-output",
+      "label-mode-select",
     ];
 
-    ids.forEach(id => {
+    ids.forEach((id) => {
       this.elements[id] = document.getElementById(id);
     });
   }
@@ -57,44 +57,56 @@ class LayoutBuilderApp {
    */
   attachEventListeners() {
     // Add speakers/subwoofers
-    if (this.elements['add-speaker-btn']) {
-      this.elements['add-speaker-btn'].addEventListener('click', () => this.addSpeaker());
+    if (this.elements["add-speaker-btn"]) {
+      this.elements["add-speaker-btn"].addEventListener("click", () =>
+        this.addSpeaker(),
+      );
     }
-    if (this.elements['add-subwoofer-btn']) {
-      this.elements['add-subwoofer-btn'].addEventListener('click', () => this.addSubwoofer());
+    if (this.elements["add-subwoofer-btn"]) {
+      this.elements["add-subwoofer-btn"].addEventListener("click", () =>
+        this.addSubwoofer(),
+      );
     }
 
     // Sort
-    if (this.elements['sort-channel-btn']) {
-      this.elements['sort-channel-btn'].addEventListener('click', () => {
+    if (this.elements["sort-channel-btn"]) {
+      this.elements["sort-channel-btn"].addEventListener("click", () => {
         this.model.sortSpeakersByChannel();
         this.refreshUI();
       });
     }
-    if (this.elements['sort-azimuth-btn']) {
-      this.elements['sort-azimuth-btn'].addEventListener('click', () => {
+    if (this.elements["sort-azimuth-btn"]) {
+      this.elements["sort-azimuth-btn"].addEventListener("click", () => {
         this.model.sortSpeakersByAzimuth();
         this.refreshUI();
       });
     }
 
     // Export/Import
-    if (this.elements['export-json-btn']) {
-      this.elements['export-json-btn'].addEventListener('click', () => this.generateExportJSON());
+    if (this.elements["export-json-btn"]) {
+      this.elements["export-json-btn"].addEventListener("click", () =>
+        this.generateExportJSON(),
+      );
     }
-    if (this.elements['copy-json-btn']) {
-      this.elements['copy-json-btn'].addEventListener('click', () => this.copyJSONToClipboard());
+    if (this.elements["copy-json-btn"]) {
+      this.elements["copy-json-btn"].addEventListener("click", () =>
+        this.copyJSONToClipboard(),
+      );
     }
-    if (this.elements['download-json-btn']) {
-      this.elements['download-json-btn'].addEventListener('click', () => this.downloadJSON());
+    if (this.elements["download-json-btn"]) {
+      this.elements["download-json-btn"].addEventListener("click", () =>
+        this.downloadJSON(),
+      );
     }
-    if (this.elements['import-btn']) {
-      this.elements['import-btn'].addEventListener('click', () => this.importFromFile());
+    if (this.elements["import-btn"]) {
+      this.elements["import-btn"].addEventListener("click", () =>
+        this.importFromFile(),
+      );
     }
 
     // Label mode toggle
-    if (this.elements['label-mode-select']) {
-      this.elements['label-mode-select'].addEventListener('change', (e) => {
+    if (this.elements["label-mode-select"]) {
+      this.elements["label-mode-select"].addEventListener("change", (e) => {
         if (this.preview) {
           this.preview.setLabelMode(e.target.value);
         }
@@ -102,9 +114,9 @@ class LayoutBuilderApp {
     }
 
     // Load example layouts
-    const exampleButtons = document.querySelectorAll('[data-example-layout]');
-    exampleButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    const exampleButtons = document.querySelectorAll("[data-example-layout]");
+    exampleButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
         const layoutName = e.target.dataset.exampleLayout;
         this.loadExampleLayout(layoutName);
       });
@@ -119,7 +131,7 @@ class LayoutBuilderApp {
       channel: this.model.getActiveSpeakers().length,
       azimuthDeg: 0,
       elevationDeg: 0,
-      radiusMeters: 1
+      radiusMeters: 1,
     });
     this.model.addSpeaker(speaker);
     this.refreshUI();
@@ -130,7 +142,7 @@ class LayoutBuilderApp {
    */
   addSubwoofer() {
     const subwoofer = this.model.createSubwoofer({
-      channel: this.model.getActiveSubwoofers().length + 10
+      channel: this.model.getActiveSubwoofers().length + 10,
     });
     this.model.addSubwoofer(subwoofer);
     this.refreshUI();
@@ -140,12 +152,12 @@ class LayoutBuilderApp {
    * Render speaker table
    */
   renderSpeakerTable() {
-    if (!this.elements['speaker-table']) return;
+    if (!this.elements["speaker-table"]) return;
 
-    const tbody = this.elements['speaker-table'].querySelector('tbody');
-    tbody.innerHTML = '';
+    const tbody = this.elements["speaker-table"].querySelector("tbody");
+    tbody.innerHTML = "";
 
-    this.model.speakers.forEach(speaker => {
+    this.model.speakers.forEach((speaker) => {
       const row = this.createSpeakerRow(speaker);
       tbody.appendChild(row);
     });
@@ -155,15 +167,15 @@ class LayoutBuilderApp {
    * Create a table row for a speaker
    */
   createSpeakerRow(speaker) {
-    const row = document.createElement('tr');
+    const row = document.createElement("tr");
     if (!speaker.enabled) {
-      row.classList.add('disabled');
+      row.classList.add("disabled");
     }
 
     row.innerHTML = `
       <td style="width: 50px;">
         <input type="checkbox" 
-          ${speaker.enabled ? 'checked' : ''}
+          ${speaker.enabled ? "checked" : ""}
           onchange="app.toggleSpeaker(${speaker.id}, this.checked)">
       </td>
       <td style="width: 40px; text-align: center; font-family: monospace;">
@@ -223,7 +235,7 @@ class LayoutBuilderApp {
    * Delete speaker
    */
   deleteSpeaker(id) {
-    if (confirm('Delete this speaker?')) {
+    if (confirm("Delete this speaker?")) {
       this.model.removeSpeaker(id);
       this.refreshUI();
     }
@@ -233,12 +245,12 @@ class LayoutBuilderApp {
    * Render subwoofer table
    */
   renderSubwooferTable() {
-    if (!this.elements['subwoofer-table']) return;
+    if (!this.elements["subwoofer-table"]) return;
 
-    const tbody = this.elements['subwoofer-table'].querySelector('tbody');
-    tbody.innerHTML = '';
+    const tbody = this.elements["subwoofer-table"].querySelector("tbody");
+    tbody.innerHTML = "";
 
-    this.model.subwoofers.forEach(subwoofer => {
+    this.model.subwoofers.forEach((subwoofer) => {
       const row = this.createSubwooferRow(subwoofer);
       tbody.appendChild(row);
     });
@@ -248,15 +260,15 @@ class LayoutBuilderApp {
    * Create a table row for a subwoofer
    */
   createSubwooferRow(subwoofer) {
-    const row = document.createElement('tr');
+    const row = document.createElement("tr");
     if (!subwoofer.enabled) {
-      row.classList.add('disabled');
+      row.classList.add("disabled");
     }
 
     row.innerHTML = `
       <td style="width: 50px;">
         <input type="checkbox"
-          ${subwoofer.enabled ? 'checked' : ''}
+          ${subwoofer.enabled ? "checked" : ""}
           onchange="app.toggleSubwoofer(${subwoofer.id}, this.checked)">
       </td>
       <td style="width: 40px; text-align: center; font-family: monospace;">
@@ -305,7 +317,7 @@ class LayoutBuilderApp {
    * Delete subwoofer
    */
   deleteSubwoofer(id) {
-    if (confirm('Delete this subwoofer?')) {
+    if (confirm("Delete this subwoofer?")) {
       this.model.removeSubwoofer(id);
       this.refreshUI();
     }
@@ -315,34 +327,35 @@ class LayoutBuilderApp {
    * Render validation messages
    */
   renderValidationMessages() {
-    if (!this.elements['validation-container']) return;
+    if (!this.elements["validation-container"]) return;
 
     this.currentValidation = this.validator.validate(this.model);
     const { messages, canExport } = this.currentValidation;
 
-    const container = this.elements['validation-container'];
-    container.innerHTML = '';
+    const container = this.elements["validation-container"];
+    container.innerHTML = "";
 
-    messages.forEach(msg => {
-      const div = document.createElement('div');
+    messages.forEach((msg) => {
+      const div = document.createElement("div");
       div.className = `validation-message ${msg.severity}`;
 
-      const icon = { error: '⚠', warning: '⚡', info: 'ℹ' }[msg.severity] || '•';
+      const icon =
+        { error: "⚠", warning: "⚡", info: "ℹ" }[msg.severity] || "•";
 
       div.innerHTML = `
         <div class="validation-message-icon">${icon}</div>
         <div class="validation-message-content">
           <div class="validation-message-title">${msg.title}</div>
           <div class="validation-message-description">${msg.description}</div>
-          ${msg.details ? `<div class="validation-message-details">${msg.details}</div>` : ''}
+          ${msg.details ? `<div class="validation-message-details">${msg.details}</div>` : ""}
         </div>
       `;
       container.appendChild(div);
     });
 
     // Update export button
-    if (this.elements['export-json-btn']) {
-      this.elements['export-json-btn'].disabled = !canExport;
+    if (this.elements["export-json-btn"]) {
+      this.elements["export-json-btn"].disabled = !canExport;
     }
   }
 
@@ -350,18 +363,15 @@ class LayoutBuilderApp {
    * Render 2D preview
    */
   renderPreview() {
-    if (!this.elements['preview-canvas']) return;
+    if (!this.elements["preview-canvas"]) return;
 
-    if (!this.preview) {
-      this.preview = new Preview2D(this.elements['preview-canvas'], this.model, {
-        width: this.elements['preview-canvas'].parentElement.clientWidth,
-        height: 400,
-        labelMode: 'channel'
-      });
-    } else {
-      this.preview.model = this.model;
-      this.preview.draw();
-    }
+    // Always recreate preview to ensure model is properly reflected
+    // (fixes issue where imported layouts weren't displaying)
+    this.preview = new Preview2D(this.elements["preview-canvas"], this.model, {
+      width: this.elements["preview-canvas"].parentElement.clientWidth,
+      height: 400,
+      labelMode: this.preview ? this.preview.labelMode : "channel",
+    });
   }
 
   /**
@@ -369,8 +379,8 @@ class LayoutBuilderApp {
    */
   generateExportJSON() {
     const json = this.exporter.exportJSON(this.model, true);
-    if (this.elements['json-output']) {
-      this.elements['json-output'].textContent = json;
+    if (this.elements["json-output"]) {
+      this.elements["json-output"].textContent = json;
     }
   }
 
@@ -381,9 +391,9 @@ class LayoutBuilderApp {
     const json = this.exporter.exportJSON(this.model, true);
     const success = await this.exporter.copyToClipboard(json);
     if (success) {
-      alert('Copied to clipboard!');
+      alert("Copied to clipboard!");
     } else {
-      alert('Failed to copy to clipboard');
+      alert("Failed to copy to clipboard");
     }
   }
 
@@ -393,22 +403,26 @@ class LayoutBuilderApp {
   downloadJSON() {
     const json = this.exporter.exportJSON(this.model, true);
     const timestamp = new Date().toISOString().slice(0, 10);
-    this.exporter.downloadFile(json, `layout_${timestamp}.json`, 'application/json');
+    this.exporter.downloadFile(
+      json,
+      `layout_${timestamp}.json`,
+      "application/json",
+    );
   }
 
   /**
    * Import from file
    */
   importFromFile() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json';
-    input.addEventListener('change', (e) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.addEventListener("change", (e) => {
       const file = e.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
-      reader.addEventListener('load', (event) => {
+      reader.addEventListener("load", (event) => {
         const jsonString = event.target.result;
         const result = this.exporter.importJSON(jsonString, LayoutModel);
 
@@ -430,19 +444,19 @@ class LayoutBuilderApp {
    */
   loadExampleLayout(layoutName) {
     const layouts = {
-      'template': 'examples/layout_template.json',
-      'translab': 'examples/translab-sono-layout.json',
-      'allosphere': 'examples/allosphere_layout.json'
+      template: "examples/layout_template.json",
+      translab: "examples/translab-sono-layout.json",
+      allosphere: "examples/allosphere_layout.json",
     };
 
     if (!layouts[layoutName]) {
-      alert('Unknown layout');
+      alert("Unknown layout");
       return;
     }
 
     fetch(layouts[layoutName])
-      .then(r => r.text())
-      .then(json => {
+      .then((r) => r.text())
+      .then((json) => {
         const result = this.exporter.importJSON(json, LayoutModel);
         if (result.success) {
           this.model = result.model;
@@ -452,7 +466,7 @@ class LayoutBuilderApp {
           alert(`Failed to load example: ${result.error}`);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         alert(`Failed to fetch example: ${err.message}`);
       });
   }
@@ -469,6 +483,6 @@ class LayoutBuilderApp {
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   window.app = new LayoutBuilderApp();
 });

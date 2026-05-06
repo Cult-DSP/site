@@ -28,9 +28,34 @@ class Preview2D {
     // Layout
     this.centerX = this.width / 2;
     this.centerY = this.height / 2;
-    this.scale = 80; // pixels per meter
 
     this.draw();
+  }
+
+  /**
+   * Calculate normalized scale based on furthest speaker distance
+   * Ensures all speakers fit in view with padding
+   */
+  calculateScale() {
+    const speakers = this.model.getActiveSpeakers();
+    if (speakers.length === 0) {
+      return 80; // default scale if no speakers
+    }
+
+    // Find max distance
+    const maxDistance = Math.max(...speakers.map(s => s.radiusMeters));
+    if (maxDistance === 0) {
+      return 80; // default if all speakers at center
+    }
+
+    // Calculate scale to fit max distance with padding
+    // Reserve 80 pixels on edges for labels, grid labels, etc.
+    const padding = 80;
+    const availableWidth = this.width - (padding * 2);
+    const availableHeight = this.height - (padding * 2);
+    const maxAvailable = Math.min(availableWidth, availableHeight) / 2;
+
+    return maxAvailable / maxDistance;
   }
 
   /**
@@ -39,6 +64,9 @@ class Preview2D {
   draw() {
     this.ctx.fillStyle = '#ffffff';
     this.ctx.fillRect(0, 0, this.width, this.height);
+
+    // Calculate dynamic scale based on layout
+    this.scale = this.calculateScale();
 
     // Draw grid and axes
     this.drawGrid();
@@ -184,10 +212,16 @@ class Preview2D {
    * @param {Object} subwoofer
    */
   drawSubwoofer(subwoofer) {
-    // Subwoofers are drawn at center by default since they don't have azimuth/radius
-    // But we can show them at the edge with a marker
-    const x = this.centerX - 30;
-    const y = this.centerY - 30;
+    // Subwoofers don't have spatial position (azimuth/radius)
+    // Draw them clustered near the listener position with an offset for visibility
+    const subwoofers = this.model.getActiveSubwoofers();
+    const idx = subwoofers.findIndex(s => s.id === subwoofer.id);
+    const offsetRadius = 35; // pixels from center
+    const angleStep = (2 * Math.PI) / Math.max(subwoofers.length, 1);
+    const angle = idx * angleStep;
+    
+    const x = this.centerX + Math.cos(angle) * offsetRadius;
+    const y = this.centerY + Math.sin(angle) * offsetRadius;
 
     // Draw square
     const size = 10;

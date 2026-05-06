@@ -3,6 +3,9 @@
 Plain HTML/CSS/JS marketing site for CULT DSP. No build step required.
 Hosted on Cloudflare Pages.
 
+cd /Users/lucian/projects/site
+python3 -m http.server 8888
+
 ## File Structure
 
 ```
@@ -24,17 +27,21 @@ Hosted on Cloudflare Pages.
 ## How to Edit Content
 
 ### Text Content (any page)
+
 Open the relevant `.html` file and edit the text directly.
 Look for comments like `<!-- EDIT: ... -->` marking the key spots.
 
 ### Design Tokens (colors, spacing, fonts)
+
 Open `style.css`. All tokens are CSS variables at the top in `:root { }`.
 Change them there and they update everywhere instantly.
 
 ### Your Email Address
+
 Search for `hello@cultdsp.com` — appears in `contact.html` (×2). Replace both.
 
 ### GitHub Organisation URL
+
 Search for `placeholder-cult-dsp` across all files and replace with your real org name.
 
 ---
@@ -50,6 +57,7 @@ Project cards live in **`projects.html`** inside clearly labelled comment blocks
 ```
 
 ### To edit an existing project:
+
 1. Open `projects.html`
 2. Find the `<!-- PROJECT CARD: ... -->` comment for the project
 3. Edit these four things inside the card:
@@ -60,6 +68,7 @@ Project cards live in **`projects.html`** inside clearly labelled comment blocks
    - **Status badge** → the last `<span class="tag">` near the bottom of the card
 
 ### To add a new project:
+
 1. Copy an entire `<article class="card project-card">...</article>` block
 2. Paste it after the last card, before `<!-- ===== END PROJECT CARDS -->` comment
 3. Edit the name, description, tags, links, and status
@@ -73,6 +82,7 @@ update them manually when you update `projects.html`.
 ## Favicon Setup
 
 Add these files to the repo root (not included — generate from your logo):
+
 - `favicon.ico` — 32×32 ICO (browser tab)
 - `favicon.svg` — SVG version
 - `apple-touch-icon.png` — 180×180 PNG
@@ -85,6 +95,7 @@ Generate them at [realfavicongenerator.net](https://realfavicongenerator.net).
 
 Each page has unique `<title>` and `<meta name="description">`.
 Update these if you change the copy:
+
 - `index.html` line 4–5
 - `projects.html` line 4–5
 - etc.
@@ -100,7 +111,7 @@ Replace the `og:url` values with your real domain once confirmed.
 3. Click **Create a project → Connect to Git**.
 4. Select your repository.
 5. Settings:
-   - **Build command:** *(leave blank — no build needed)*
+   - **Build command:** _(leave blank — no build needed)_
    - **Build output directory:** `/` (or leave blank)
 6. Click **Save and Deploy**.
 
@@ -108,6 +119,7 @@ Cloudflare will serve the root of your repo directly. All HTML files are
 accessible at their filename paths (e.g. `/projects.html`).
 
 ### Custom Domain
+
 In the Cloudflare Pages project settings → **Custom domains** → add your domain.
 Then update `sitemap.xml` and `robots.txt` with the real domain.
 
