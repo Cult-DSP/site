@@ -179,8 +179,8 @@ button:disabled {
 
 /* Load example button - special styling */
 #load-example-btn {
-  background: var(--color-blue-accent);
-  border-color: var(--color-blue-accent);
+  background: var(--accent, #2c52a0);
+  border-color: var(--accent, #2c52a0);
   color: white;
   font-weight: 600;
   box-shadow: var(--shadow-sm);
