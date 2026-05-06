@@ -118,11 +118,21 @@ class LayoutBuilderApp {
     const loadExampleBtn = document.getElementById("load-example-btn");
     if (loadExampleBtn) {
       loadExampleBtn.addEventListener("click", () => {
-        if (exampleSelect && exampleSelect.value) {
-          this.loadExampleLayout(exampleSelect.value);
-          exampleSelect.value = ""; // Reset dropdown
+        if (!exampleSelect || !exampleSelect.value) {
+          alert("Please select an example layout first");
+          return;
         }
+        this.loadExampleLayout(exampleSelect.value);
+        exampleSelect.value = ""; // Reset dropdown
       });
+      
+      // Optional: disable button when no selection
+      if (exampleSelect) {
+        exampleSelect.addEventListener("change", () => {
+          loadExampleBtn.style.opacity = exampleSelect.value ? "1" : "0.6";
+        });
+        loadExampleBtn.style.opacity = "0.6"; // Start disabled
+      }
     }
   }
 

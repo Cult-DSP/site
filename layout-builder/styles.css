@@ -177,6 +177,27 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Load example button - special styling */
+#load-example-btn {
+  background: var(--color-blue-accent);
+  border-color: var(--color-blue-accent);
+  color: white;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+#load-example-btn:hover:not(:disabled) {
+  background: #1e3f6d;
+  border-color: #1e3f6d;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+#load-example-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
 /* Button groups */
 .button-group {
   display: flex;
