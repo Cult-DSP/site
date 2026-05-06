@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spatial Root Layout Builder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Spatial Root Layout Builder</h1>
+        <p>
+          Create, edit, validate, and export speaker layout JSON files for Spatial Root.
+          <br />
+          Spatial Root supports nonlinear speaker layouts with flexible device channel routing.
+        </p>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="panel" style="margin-bottom: var(--spacing-lg);">
+        <h2>Quick Load</h2>
+        <div class="button-group">
+          <button data-example-layout="template">Template (4 speakers)</button>
+          <button data-example-layout="translab">TransLAB (12 + sub)</button>
+          <button data-example-layout="allosphere">AlloSphere (nonlinear)</button>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="content">
+        <!-- Left column: editing -->
+        <div>
+          <!-- Speaker table -->
+          <div class="panel" style="margin-bottom: var(--spacing-lg);">
+            <h2>Speakers</h2>
+            <div style="margin-bottom: var(--spacing-md);">
+              <button class="primary" id="add-speaker-btn">+ Add Speaker</button>
+              <button id="sort-channel-btn">Sort by Channel</button>
+              <button id="sort-azimuth-btn">Sort by Azimuth</button>
+            </div>
+            <div style="overflow-x: auto;">
+              <table id="speaker-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">On</th>
+                    <th style="width: 40px;">ID</th>
+                    <th style="width: 60px;">Channel</th>
+                    <th style="width: 80px;">Az (°)</th>
+                    <th style="width: 80px;">El (°)</th>
+                    <th style="width: 80px;">Radius (m)</th>
+                    <th style="width: 80px;"></th>
+                    <th style="width: 60px;"></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Subwoofer table -->
+          <div class="panel" style="margin-bottom: var(--spacing-lg);">
+            <h2>Subwoofers</h2>
+            <button class="primary" id="add-subwoofer-btn">+ Add Subwoofer</button>
+            <div style="margin-top: var(--spacing-md); overflow-x: auto;">
+              <table id="subwoofer-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">On</th>
+                    <th style="width: 40px;">ID</th>
+                    <th style="width: 60px;">Channel</th>
+                    <th style="flex: 1;"></th>
+                    <th style="width: 80px;"></th>
+                    <th style="width: 60px;"></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: preview and validation -->
+        <div>
+          <!-- Validation -->
+          <div class="panel" style="margin-bottom: var(--spacing-lg);">
+            <h2>Validation & Status</h2>
+            <div id="validation-container"></div>
+          </div>
+
+          <!-- Preview -->
+          <div class="panel" style="margin-bottom: var(--spacing-lg);">
+            <h2>Visual Preview (Top-Down)</h2>
+            <div style="margin-bottom: var(--spacing-md);">
+              <label for="label-mode-select">Label Mode:</label>
+              <select id="label-mode-select" style="margin-top: var(--spacing-xs);">
+                <option value="channel">Device Channel</option>
+                <option value="id">Internal ID</option>
+              </select>
+            </div>
+            <canvas id="preview-canvas" width="600" height="400"></canvas>
+            <div class="text-sm text-secondary" style="margin-top: var(--spacing-md);">
+              Top-down polar view. Listener at center. Azimuth: 0° front, 90° right, 180° back,
+              270° left. Elevated speakers show blue ring. Depressed speakers show orange ring.
+            </div>
+          </div>
+
+          <!-- Export -->
+          <div class="panel">
+            <h2>Export & Import</h2>
+            <div class="button-group" style="margin-bottom: var(--spacing-md);">
+              <button class="primary" id="export-json-btn" disabled>Generate JSON</button>
+              <button id="copy-json-btn">Copy to Clipboard</button>
+              <button id="download-json-btn">Download JSON</button>
+              <button id="import-btn">Import JSON File</button>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg);">
+              <label>JSON Output (radians):</label>
+              <div id="json-output" class="json-output"></div>
+            </div>
+
+            <div class="text-sm text-secondary" style="margin-top: var(--spacing-md);">
+              <strong>Note:</strong> Display uses degrees for convenience. Export converts to
+              radians for Spatial Root compatibility. Enable/disabled elements are honored (only
+              active elements export). Notes are preserved if present.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-border);">
+        <p class="text-sm text-secondary">
+          Spatial Root is a layout-agnostic spatial audio playback engine.
+          <br />
+          This builder helps create valid speaker layout configurations for routing and rendering.
+          <br />
+          <a href="https://github.com/Cult-DSP/Spatial-Root" target="_blank">View on GitHub</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Core modules (must load in order) -->
+    <script src="src/layoutModel.js"></script>
+    <script src="src/validation.js"></script>
+    <script src="src/importExport.js"></script>
+    <script src="src/preview2d.js"></script>
+    <script src="src/app.js"></script>
+  </body>
+</html>
