@@ -116,23 +116,28 @@ class LayoutBuilderApp {
     // Load example layouts dropdown
     const exampleSelect = document.getElementById("example-select");
     const loadExampleBtn = document.getElementById("load-example-btn");
-    if (loadExampleBtn) {
-      loadExampleBtn.addEventListener("click", () => {
-        if (!exampleSelect || !exampleSelect.value) {
+    
+    if (loadExampleBtn && exampleSelect) {
+      // Click handler - use arrow function to preserve 'this'
+      loadExampleBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (!exampleSelect.value) {
           alert("Please select an example layout first");
           return;
         }
+        console.log("Button clicked, loading:", exampleSelect.value);
         this.loadExampleLayout(exampleSelect.value);
-        exampleSelect.value = ""; // Reset dropdown
       });
       
-      // Optional: disable button when no selection
-      if (exampleSelect) {
-        exampleSelect.addEventListener("change", () => {
-          loadExampleBtn.style.opacity = exampleSelect.value ? "1" : "0.6";
-        });
-        loadExampleBtn.style.opacity = "0.6"; // Start disabled
-      }
+      // Change handler for visual feedback
+      exampleSelect.addEventListener("change", (e) => {
+        loadExampleBtn.style.opacity = e.target.value ? "1" : "0.6";
+        loadExampleBtn.disabled = !e.target.value;
+      });
+      
+      // Initialize button state
+      loadExampleBtn.style.opacity = "0.6";
+      loadExampleBtn.disabled = true;
     }
   }
 
@@ -458,22 +463,22 @@ class LayoutBuilderApp {
   loadExampleLayout(layoutName) {
     const layouts = {
       // Basic
-      stereo: "examples/stereo.json",
-      quad: "examples/quad_4.json",
-      hexagon: "examples/hexagon_6.json",
-      octagon: "examples/octagon_8.json",
+      stereo: "./examples/stereo.json",
+      quad: "./examples/quad_4.json",
+      hexagon: "./examples/hexagon_6.json",
+      octagon: "./examples/octagon_8.json",
       // Ring layouts
-      circle_12: "examples/circle_12.json",
-      circle_16: "examples/circle_16.json",
-      ring8_top4: "examples/ring8_top4.json",
-      ring12_top4: "examples/ring12_top4.json",
+      circle_12: "./examples/circle_12.json",
+      circle_16: "./examples/circle_16.json",
+      ring8_top4: "./examples/ring8_top4.json",
+      ring12_top4: "./examples/ring12_top4.json",
       // 3D layouts
-      cube: "examples/cube_8.json",
-      dual_ring: "examples/dual_ring_16.json",
+      cube: "./examples/cube_8.json",
+      dual_ring: "./examples/dual_ring_16.json",
       // Advanced
-      "5_1": "examples/5_1.json",
-      translab: "examples/translab-sono-layout.json",
-      allosphere: "examples/allosphere_layout.json",
+      "5_1": "./examples/5_1.json",
+      translab: "./examples/translab-sono-layout.json",
+      allosphere: "./examples/allosphere_layout.json",
     };
 
     if (!layouts[layoutName]) {
@@ -481,19 +486,31 @@ class LayoutBuilderApp {
       return;
     }
 
-    fetch(layouts[layoutName])
-      .then((r) => r.text())
+    const filePath = layouts[layoutName];
+    console.log("Loading layout:", layoutName, "from:", filePath);
+
+    fetch(filePath)
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+        }
+        return r.text();
+      })
       .then((json) => {
+        console.log("Fetched JSON, parsing...");
         const result = this.exporter.importJSON(json, LayoutModel);
         if (result.success) {
           this.model = result.model;
           this.refreshUI();
+          console.log("Layout loaded successfully:", result.summary);
           alert(`Loaded: ${layoutName}\n\n${result.summary}`);
         } else {
+          console.error("Import failed:", result.error);
           alert(`Failed to load example: ${result.error}`);
         }
       })
       .catch((err) => {
+        console.error("Fetch error:", err);
         alert(`Failed to fetch example: ${err.message}`);
       });
   }
