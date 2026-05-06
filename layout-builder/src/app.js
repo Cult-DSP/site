@@ -113,14 +113,17 @@ class LayoutBuilderApp {
       });
     }
 
-    // Load example layouts
-    const exampleButtons = document.querySelectorAll("[data-example-layout]");
-    exampleButtons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const layoutName = e.target.dataset.exampleLayout;
-        this.loadExampleLayout(layoutName);
+    // Load example layouts dropdown
+    const exampleSelect = document.getElementById("example-select");
+    const loadExampleBtn = document.getElementById("load-example-btn");
+    if (loadExampleBtn) {
+      loadExampleBtn.addEventListener("click", () => {
+        if (exampleSelect && exampleSelect.value) {
+          this.loadExampleLayout(exampleSelect.value);
+          exampleSelect.value = ""; // Reset dropdown
+        }
       });
-    });
+    }
   }
 
   /**
@@ -444,7 +447,21 @@ class LayoutBuilderApp {
    */
   loadExampleLayout(layoutName) {
     const layouts = {
-      template: "examples/layout_template.json",
+      // Basic
+      stereo: "examples/stereo.json",
+      quad: "examples/quad_4.json",
+      hexagon: "examples/hexagon_6.json",
+      octagon: "examples/octagon_8.json",
+      // Ring layouts
+      circle_12: "examples/circle_12.json",
+      circle_16: "examples/circle_16.json",
+      ring8_top4: "examples/ring8_top4.json",
+      ring12_top4: "examples/ring12_top4.json",
+      // 3D layouts
+      cube: "examples/cube_8.json",
+      dual_ring: "examples/dual_ring_16.json",
+      // Advanced
+      "5_1": "examples/5_1.json",
       translab: "examples/translab-sono-layout.json",
       allosphere: "examples/allosphere_layout.json",
     };

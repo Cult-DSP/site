@@ -138,11 +138,33 @@
 
       <!-- Quick actions -->
       <div class="panel" style="margin-bottom: var(--spacing-lg);">
-        <h2>Quick Load</h2>
-        <div class="button-group">
-          <button data-example-layout="template">Template (4 speakers)</button>
-          <button data-example-layout="translab">TransLAB (12 + sub)</button>
-          <button data-example-layout="allosphere">AlloSphere (nonlinear)</button>
+        <h2>Load Example Layout</h2>
+        <div style="display: flex; gap: var(--spacing-md);">
+          <select id="example-select" style="flex: 1; padding: var(--spacing-sm); border: 1px solid var(--color-border); border-radius: 4px; font-size: 14px;">
+            <option value="">— Select an example layout —</option>
+            <optgroup label="Basic">
+              <option value="stereo">Stereo (2 speakers)</option>
+              <option value="quad">Quad (4 speakers)</option>
+              <option value="hexagon">Hexagon (6 speakers)</option>
+              <option value="octagon">Octagon (8 speakers)</option>
+            </optgroup>
+            <optgroup label="Ring Layouts">
+              <option value="circle_12">Circle 12</option>
+              <option value="circle_16">Circle 16</option>
+              <option value="ring8_top4">Ring 8 + Top 4</option>
+              <option value="ring12_top4">Ring 12 + Top 4</option>
+            </optgroup>
+            <optgroup label="3D Layouts">
+              <option value="cube">Cube (8 speakers)</option>
+              <option value="dual_ring">Dual Ring (16 speakers)</option>
+            </optgroup>
+            <optgroup label="Advanced">
+              <option value="5_1">5.1 Surround</option>
+              <option value="translab">TransLAB Sono (12 + sub)</option>
+              <option value="allosphere">AlloSphere (nonlinear)</option>
+            </optgroup>
+          </select>
+          <button id="load-example-btn" style="padding: var(--spacing-sm) var(--spacing-md); background-color: var(--color-accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Load</button>
         </div>
       </div>
 
