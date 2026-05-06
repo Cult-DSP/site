@@ -1,0 +1,31 @@
+{
+  "speakers": [
+    {
+      "channel": 0,
+      "az": 0.0,
+      "el": 0.0,
+      "radius": 1.0
+    },
+    {
+      "channel": 1,
+      "az": 1.5707963267948966,
+      "el": 0.0,
+      "radius": 1.0
+    },
+    {
+      "channel": 2,
+      "az": 3.141592653589793,
+      "el": 0.0,
+      "radius": 1.0
+    },
+    {
+      "channel": 3,
+      "az": 4.71238898038469,
+      "el": 0.0,
+      "radius": 1.0
+    }
+  ],
+  "notes": [
+    "Minimal template: 4 speakers in a square, zero-based channels"
+  ]
+}

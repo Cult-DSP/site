@@ -1,0 +1,85 @@
+{
+  "speakers": [
+    {
+      "channel": 0,
+      "az": 0.0,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 1,
+      "az": 0.5235987755982988,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 2,
+      "az": 1.0471975511965976,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 3,
+      "az": 1.5707963267948966,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 4,
+      "az": 2.0943951023931953,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 5,
+      "az": 2.617993877991494,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 6,
+      "az": 3.141592653589793,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 7,
+      "az": 3.665191429188092,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 8,
+      "az": 4.1887902047863905,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 9,
+      "az": 4.71238898038469,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 10,
+      "az": 5.235987755982989,
+      "el": 0.0,
+      "radius": 2.5
+    },
+    {
+      "channel": 11,
+      "az": 5.759586531581287,
+      "el": 0.0,
+      "radius": 2.5
+    }
+  ],
+  "subwoofers": [
+    {
+      "channel": 12
+    }
+  ],
+  "notes": [
+    "TransLAB-style layout: 12 speakers in a ring around the listener at 30-degree intervals",
+    "1 subwoofer on channel 12 (outside the speaker channel range)"
+  ]
+}
