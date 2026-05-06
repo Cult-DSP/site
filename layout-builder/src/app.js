@@ -116,7 +116,7 @@ class LayoutBuilderApp {
     // Load example layouts dropdown
     const exampleSelect = document.getElementById("example-select");
     const loadExampleBtn = document.getElementById("load-example-btn");
-    
+
     if (loadExampleBtn && exampleSelect) {
       // Click handler - use arrow function to preserve 'this'
       loadExampleBtn.addEventListener("click", (e) => {
@@ -128,13 +128,13 @@ class LayoutBuilderApp {
         console.log("Button clicked, loading:", exampleSelect.value);
         this.loadExampleLayout(exampleSelect.value);
       });
-      
+
       // Change handler for visual feedback
       exampleSelect.addEventListener("change", (e) => {
         loadExampleBtn.style.opacity = e.target.value ? "1" : "0.6";
         loadExampleBtn.disabled = !e.target.value;
       });
-      
+
       // Initialize button state
       loadExampleBtn.style.opacity = "0.6";
       loadExampleBtn.disabled = true;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,12 +8,21 @@
       name="description"
       content="Spatial Root Layout Builder — create, edit, validate, and export speaker layout JSON files."
     />
-    <link rel="icon" type="image/png" href="../favicon-96x96.png" sizes="96x96" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../favicon-96x96.png"
+      sizes="96x96"
+    />
     <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
     <link rel="shortcut icon" href="../favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../apple-touch-icon.png"
+    />
     <link rel="manifest" href="../site.webmanifest" />
-    
+
     <!-- Load website styles first, then layout builder overrides -->
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="styles.css" />
@@ -127,164 +136,228 @@
 
     <main id="main">
       <div class="container">
-        <div class="header" style="margin-top: var(--spacing-lg);">
-        <h1>Spatial Root Layout Builder</h1>
-        <p>
-          Create, edit, validate, and export speaker layout JSON files for Spatial Root.
-          <br />
-          Spatial Root supports nonlinear speaker layouts with flexible device channel routing.
-        </p>
-      </div>
-
-      <!-- Quick actions -->
-      <div class="panel" style="margin-bottom: var(--spacing-lg);">
-        <h2>Load Example Layout</h2>
-        <div style="display: flex; gap: var(--spacing-md); align-items: flex-end;">
-          <div style="flex: 1;">
-            <label for="example-select" style="display: block; font-weight: 500; margin-bottom: 6px;">Select a preset:</label>
-            <select id="example-select" style="width: 100%; padding: var(--spacing-sm); border: 1px solid var(--color-border); border-radius: 4px; font-size: 14px; background-color: white;">
-              <option value="">— Choose an example —</option>
-              <optgroup label="Basic">
-                <option value="stereo">Stereo (2 speakers)</option>
-                <option value="quad">Quad (4 speakers)</option>
-                <option value="hexagon">Hexagon (6 speakers)</option>
-                <option value="octagon">Octagon (8 speakers)</option>
-              </optgroup>
-              <optgroup label="Ring Layouts">
-                <option value="circle_12">Circle 12</option>
-                <option value="circle_16">Circle 16</option>
-                <option value="ring8_top4">Ring 8 + Top 4</option>
-                <option value="ring12_top4">Ring 12 + Top 4</option>
-              </optgroup>
-              <optgroup label="3D Layouts">
-                <option value="cube">Cube (8 speakers)</option>
-                <option value="dual_ring">Dual Ring (16 speakers)</option>
-              </optgroup>
-              <optgroup label="Advanced">
-                <option value="5_1">5.1 Surround</option>
-                <option value="translab">TransLAB Sono (12 + sub)</option>
-                <option value="allosphere">AlloSphere (nonlinear)</option>
-              </optgroup>
-            </select>
-          </div>
-          <button id="load-example-btn" style="padding: var(--spacing-sm) var(--spacing-lg); background-color: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 14px; white-space: nowrap; transition: background-color 0.2s;">Load Layout</button>
-        </div>
-      </div>
-
-      <!-- Main content -->
-      <div class="content">
-        <!-- Left column: editing -->
-        <div>
-          <!-- Speaker table -->
-          <div class="panel" style="margin-bottom: var(--spacing-lg);">
-            <h2>Speakers</h2>
-            <div style="margin-bottom: var(--spacing-md);">
-              <button class="primary" id="add-speaker-btn">+ Add Speaker</button>
-              <button id="sort-channel-btn">Sort by Channel</button>
-              <button id="sort-azimuth-btn">Sort by Azimuth</button>
-            </div>
-            <div style="overflow-x: auto;">
-              <table id="speaker-table">
-                <thead>
-                  <tr>
-                    <th style="width: 50px;">On</th>
-                    <th style="width: 40px;">ID</th>
-                    <th style="width: 60px;">Channel</th>
-                    <th style="width: 80px;">Az (°)</th>
-                    <th style="width: 80px;">El (°)</th>
-                    <th style="width: 80px;">Radius (m)</th>
-                    <th style="width: 80px;"></th>
-                    <th style="width: 60px;"></th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Subwoofer table -->
-          <div class="panel" style="margin-bottom: var(--spacing-lg);">
-            <h2>Subwoofers</h2>
-            <button class="primary" id="add-subwoofer-btn">+ Add Subwoofer</button>
-            <div style="margin-top: var(--spacing-md); overflow-x: auto;">
-              <table id="subwoofer-table">
-                <thead>
-                  <tr>
-                    <th style="width: 50px;">On</th>
-                    <th style="width: 40px;">ID</th>
-                    <th style="width: 60px;">Channel</th>
-                    <th style="flex: 1;"></th>
-                    <th style="width: 80px;"></th>
-                    <th style="width: 60px;"></th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
+        <div class="header" style="margin-top: var(--spacing-lg)">
+          <h1>Spatial Root Layout Builder</h1>
+          <p>
+            Create, edit, validate, and export speaker layout JSON files for
+            Spatial Root.
+            <br />
+            Spatial Root supports nonlinear speaker layouts with flexible device
+            channel routing.
+          </p>
         </div>
 
-        <!-- Right column: preview and validation -->
-        <div>
-          <!-- Validation -->
-          <div class="panel" style="margin-bottom: var(--spacing-lg);">
-            <h2>Validation & Status</h2>
-            <div id="validation-container"></div>
-          </div>
-
-          <!-- Preview -->
-          <div class="panel" style="margin-bottom: var(--spacing-lg);">
-            <h2>Visual Preview (Top-Down)</h2>
-            <div style="margin-bottom: var(--spacing-md);">
-              <label for="label-mode-select">Label Mode:</label>
-              <select id="label-mode-select" style="margin-top: var(--spacing-xs);">
-                <option value="channel">Device Channel</option>
-                <option value="id">Internal ID</option>
+        <!-- Quick actions -->
+        <div class="panel" style="margin-bottom: var(--spacing-lg)">
+          <h2>Load Example Layout</h2>
+          <div
+            style="display: flex; gap: var(--spacing-md); align-items: flex-end"
+          >
+            <div style="flex: 1">
+              <label
+                for="example-select"
+                style="display: block; font-weight: 500; margin-bottom: 6px"
+                >Select a preset:</label
+              >
+              <select
+                id="example-select"
+                style="
+                  width: 100%;
+                  padding: var(--spacing-sm);
+                  border: 1px solid var(--color-border);
+                  border-radius: 4px;
+                  font-size: 14px;
+                  background-color: white;
+                "
+              >
+                <option value="">— Choose an example —</option>
+                <optgroup label="Basic">
+                  <option value="stereo">Stereo (2 speakers)</option>
+                  <option value="quad">Quad (4 speakers)</option>
+                  <option value="hexagon">Hexagon (6 speakers)</option>
+                  <option value="octagon">Octagon (8 speakers)</option>
+                </optgroup>
+                <optgroup label="Ring Layouts">
+                  <option value="circle_12">Circle 12</option>
+                  <option value="circle_16">Circle 16</option>
+                  <option value="ring8_top4">Ring 8 + Top 4</option>
+                  <option value="ring12_top4">Ring 12 + Top 4</option>
+                </optgroup>
+                <optgroup label="3D Layouts">
+                  <option value="cube">Cube (8 speakers)</option>
+                  <option value="dual_ring">Dual Ring (16 speakers)</option>
+                </optgroup>
+                <optgroup label="Advanced">
+                  <option value="5_1">5.1 Surround</option>
+                  <option value="translab">TransLAB Sono (12 + sub)</option>
+                  <option value="allosphere">AlloSphere (nonlinear)</option>
+                </optgroup>
               </select>
             </div>
-            <canvas id="preview-canvas" width="600" height="400"></canvas>
-            <div class="text-sm text-secondary" style="margin-top: var(--spacing-md);">
-              Top-down polar view. Listener at center. Azimuth: 0° front, 90° right, 180° back,
-              270° left. Elevated speakers show blue ring. Depressed speakers show orange ring.
+            <button
+              id="load-example-btn"
+              style="
+                padding: var(--spacing-sm) var(--spacing-lg);
+                background-color: var(--accent);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 14px;
+                white-space: nowrap;
+                transition: background-color 0.2s;
+              "
+            >
+              Load Layout
+            </button>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="content">
+          <!-- Left column: editing -->
+          <div>
+            <!-- Speaker table -->
+            <div class="panel" style="margin-bottom: var(--spacing-lg)">
+              <h2>Speakers</h2>
+              <div style="margin-bottom: var(--spacing-md)">
+                <button class="primary" id="add-speaker-btn">
+                  + Add Speaker
+                </button>
+                <button id="sort-channel-btn">Sort by Channel</button>
+                <button id="sort-azimuth-btn">Sort by Azimuth</button>
+              </div>
+              <div style="overflow-x: auto">
+                <table id="speaker-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 50px">On</th>
+                      <th style="width: 40px">ID</th>
+                      <th style="width: 60px">Channel</th>
+                      <th style="width: 80px">Az (°)</th>
+                      <th style="width: 80px">El (°)</th>
+                      <th style="width: 80px">Radius (m)</th>
+                      <th style="width: 80px"></th>
+                      <th style="width: 60px"></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Subwoofer table -->
+            <div class="panel" style="margin-bottom: var(--spacing-lg)">
+              <h2>Subwoofers</h2>
+              <button class="primary" id="add-subwoofer-btn">
+                + Add Subwoofer
+              </button>
+              <div style="margin-top: var(--spacing-md); overflow-x: auto">
+                <table id="subwoofer-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 50px">On</th>
+                      <th style="width: 40px">ID</th>
+                      <th style="width: 60px">Channel</th>
+                      <th style="flex: 1"></th>
+                      <th style="width: 80px"></th>
+                      <th style="width: 60px"></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
             </div>
           </div>
 
-          <!-- Export -->
-          <div class="panel">
-            <h2>Export & Import</h2>
-            <div class="button-group" style="margin-bottom: var(--spacing-md);">
-              <button class="primary" id="export-json-btn" disabled>Generate JSON</button>
-              <button id="copy-json-btn">Copy to Clipboard</button>
-              <button id="download-json-btn">Download JSON</button>
-              <button id="import-btn">Import JSON File</button>
+          <!-- Right column: preview and validation -->
+          <div>
+            <!-- Validation -->
+            <div class="panel" style="margin-bottom: var(--spacing-lg)">
+              <h2>Validation & Status</h2>
+              <div id="validation-container"></div>
             </div>
 
-            <div style="margin-top: var(--spacing-lg);">
-              <label>JSON Output (radians):</label>
-              <div id="json-output" class="json-output"></div>
+            <!-- Preview -->
+            <div class="panel" style="margin-bottom: var(--spacing-lg)">
+              <h2>Visual Preview (Top-Down)</h2>
+              <div style="margin-bottom: var(--spacing-md)">
+                <label for="label-mode-select">Label Mode:</label>
+                <select
+                  id="label-mode-select"
+                  style="margin-top: var(--spacing-xs)"
+                >
+                  <option value="channel">Device Channel</option>
+                  <option value="id">Internal ID</option>
+                </select>
+              </div>
+              <canvas id="preview-canvas" width="600" height="400"></canvas>
+              <div
+                class="text-sm text-secondary"
+                style="margin-top: var(--spacing-md)"
+              >
+                Top-down polar view. Listener at center. Azimuth: 0° front, 90°
+                right, 180° back, 270° left. Elevated speakers show blue ring.
+                Depressed speakers show orange ring.
+              </div>
             </div>
 
-            <div class="text-sm text-secondary" style="margin-top: var(--spacing-md);">
-              <strong>Note:</strong> Display uses degrees for convenience. Export converts to
-              radians for Spatial Root compatibility. Enable/disabled elements are honored (only
-              active elements export). Notes are preserved if present.
+            <!-- Export -->
+            <div class="panel">
+              <h2>Export & Import</h2>
+              <div
+                class="button-group"
+                style="margin-bottom: var(--spacing-md)"
+              >
+                <button class="primary" id="export-json-btn" disabled>
+                  Generate JSON
+                </button>
+                <button id="copy-json-btn">Copy to Clipboard</button>
+                <button id="download-json-btn">Download JSON</button>
+                <button id="import-btn">Import JSON File</button>
+              </div>
+
+              <div style="margin-top: var(--spacing-lg)">
+                <label>JSON Output (radians):</label>
+                <div id="json-output" class="json-output"></div>
+              </div>
+
+              <div
+                class="text-sm text-secondary"
+                style="margin-top: var(--spacing-md)"
+              >
+                <strong>Note:</strong> Display uses degrees for convenience.
+                Export converts to radians for Spatial Root compatibility.
+                Enable/disabled elements are honored (only active elements
+                export). Notes are preserved if present.
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Footer -->
-      <div style="margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--color-border);">
-        <p class="text-sm text-secondary">
-          Spatial Root is a layout-agnostic spatial audio playback engine.
-          <br />
-          This builder helps create valid speaker layout configurations for routing and rendering.
-          <br />
-          <a href="https://github.com/Cult-DSP/Spatial-Root" target="_blank">View on GitHub</a> •
-          <a href="README.md" target="_blank">View Documentation</a>
-        </p>
+        <!-- Footer -->
+        <div
+          style="
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+          "
+        >
+          <p class="text-sm text-secondary">
+            Spatial Root is a layout-agnostic spatial audio playback engine.
+            <br />
+            This builder helps create valid speaker layout configurations for
+            routing and rendering.
+            <br />
+            <a href="https://github.com/Cult-DSP/Spatial-Root" target="_blank"
+              >View on GitHub</a
+            >
+            •
+            <a href="README.md" target="_blank">View Documentation</a>
+          </p>
+        </div>
       </div>
-    </div>
     </main>
 
     <!-- Navigation toggle script -->
