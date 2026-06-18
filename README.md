@@ -81,13 +81,17 @@ update them manually when you update `projects.html`.
 
 ## Favicon Setup
 
-Add these files to the repo root (not included — generate from your logo):
+These files live in the repo root and are served directly by Cloudflare Pages:
 
-- `favicon.ico` — 32×32 ICO (browser tab)
-- `favicon.svg` — SVG version
-- `apple-touch-icon.png` — 180×180 PNG
+- `favicon.ico` — browser tab icon
+- `favicon.svg` — SVG favicon
+- `favicon-96x96.png` — PNG favicon
+- `apple-touch-icon.png` — 180×180 iOS icon
+- `site.webmanifest` — web app manifest
+- `web-app-manifest-192x192.png` — manifest icon
+- `web-app-manifest-512x512.png` — manifest icon
 
-Generate them at [realfavicongenerator.net](https://realfavicongenerator.net).
+If you replace the brand mark, regenerate the favicon set and overwrite the root files above.
 
 ---
 
